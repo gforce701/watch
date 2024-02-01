@@ -85,9 +85,16 @@ Rails.application.configure do
     config.logger = ActiveSupport::TaggedLogging.new(logger)
   end
 
+  provider  = (ENV["SMTP_PROVIDER"] || "SENDGRID").to_s
+  address   = ENV["#{provider}_ADDRESS"] || "smtp.postmarkapp.com"
+  #user_name = ENV["#{provider}_USERNAME" || (provider == "SES" ? (ENV["AWS_ACCESS_KEY_ID"] || ENV["ACCESS_KEY_ID"] ) : nil) ]  # for AWS SES, this is your access key id
+  #password  = ENV["#{provider}_PASSWORD" || (provider == "SES" ? (ENV["AWS_SECRET_ACCESS_KEY"] || ENV["SECRET_ACCESS_KEY"] ) : nil) ]  # for AWS SES, this is your secret access key
+  #domain    = ENV["#{provider}_DOMAIN"] || "heroku.com"
+  port      = ENV["#{provider}_PORT"] || "587"
+  
   ActionMailer::Base.smtp_settings = {
-    :address        => 'smtp.postmarkapp.com',
-    :port           => 587,
+    :address        => address,
+    :port           => port,
     :authentication => :plain,
     :user_name      => '7cae623e-3d83-4417-b526-139be45bda6c',
     :password       => '7cae623e-3d83-4417-b526-139be45bda6c',
