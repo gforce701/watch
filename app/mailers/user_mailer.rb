@@ -15,7 +15,7 @@ class UserMailer < ApplicationMailer
     @url = token_session_url(token: token)
     @user = user
 
-    mail(to: @user.email, subject: 'Welcome to Klaxon!')
+    mail(to: @user.email, subject: 'Welcome!')
   end
 
 end
