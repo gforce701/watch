@@ -94,4 +94,3 @@ ActionMailer::Base.smtp_settings = {
     :domain         => 'builders.exchange',
     :enable_starttls_auto => true
   }
-end
