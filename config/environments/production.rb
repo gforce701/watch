@@ -93,7 +93,7 @@ Rails.application.configure do
   port      = ENV["#{provider}_PORT"] || "587"
   
   ActionMailer::Base.smtp_settings = {
-    :address        => address,
+    :address        => "smtp.postmarkapp.com",
     :port           => port,
     :authentication => :plain,
     :user_name      => '7cae623e-3d83-4417-b526-139be45bda6c',
