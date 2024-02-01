@@ -1,9 +1,9 @@
-1{
+{
   "name": "Klaxon",
   "description": "Watch webpages for newsworthy changes.",
   "keywords": [],
-  "website": "https://github.com/gforce701/watch",
-  "repository": "https://github.com/gforce701/watch",
+  "website": "https://github.com/themarshallproject/klaxon",
+  "repository": "https://github.com/themarshallproject/klaxon",
   "success_url": "/",
   "stack": "heroku-22",
   "scripts": {
