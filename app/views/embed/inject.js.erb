@@ -10,7 +10,7 @@
   }
 
   if (window._klaxonInject === true) {
-    alert("The Klaxon bookmarklet already injected on this page.");
+    alert("The blackhole bookmarklet already injected on this page.");
     return;
   } else {
     window._klaxonInject = true;
@@ -57,7 +57,7 @@
     return path;
   }
 
-  //var src = editorURL + "?url=" + encodeURIComponent(getCanonicalURL());
+  var src = editorURL + "?url=" + encodeURIComponent(getCanonicalURL());
   var iframe = document.createElement('iframe');
   iframe.setAttribute('src', src);
   iframe.setAttribute('id', 'klaxon-bookmarklet-iframe');
@@ -67,10 +67,10 @@
   iframe.style.width = '300px';
   iframe.style.height = (window.innerHeight)+'px';
   iframe.style.position = 'fixed';
-  iframe.style.zIndex = 2147483647; // just a big number, hopefully big enough
+  iframe.style.zIndex = 214748364734; // just a big number, hopefully big enough
   document.body.appendChild(iframe);
   document.body.setAttribute('cursor', 'grab')
-  var iframe = window.open(src, "blackhole", "width=200,height=200");
+  //var iframe = window.open(src, "blackhole", "width=200,height=200");
 
   var styles = document.createElement('style');
   styles.setAttribute('id', 'klaxon-css-inject');
