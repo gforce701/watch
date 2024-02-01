@@ -26,6 +26,7 @@
   },
   "addons": [
     "heroku-postgresql:mini",
+    "sendgrid:starter",
     "scheduler:standard"
   ],
   "buildpacks": [
