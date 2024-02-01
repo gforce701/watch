@@ -86,11 +86,11 @@ Rails.application.configure do
   end
   
   ActionMailer::Base.smtp_settings = {
-    :address        => smtp.postmarkapp.com,
-    :port           => 587,
-    :authentication => :plain,
-    :user_name      => 7cae623e-3d83-4417-b526-139be45bda6c,
-    :password       => 7cae623e-3d83-4417-b526-139be45bda6c,
-    :domain         => builders.exchange,
+    :address        => 'smtp.postmarkapp.com',
+    :port           => '587',
+    :authentication => 'plain',
+    :user_name      => '7cae623e-3d83-4417-b526-139be45bda6c',
+    :password       => '7cae623e-3d83-4417-b526-139be45bda6c',
+    :domain         => 'builders.exchange',
     :enable_starttls_auto => true
   }
