@@ -25,7 +25,7 @@ class AppSetting < ApplicationRecord
     if ENV['MAILER_FROM_ADDRESS'].present?
       ENV['MAILER_FROM_ADDRESS']
     else
-      'Klaxon <no-reply@newsklaxon.org>'
+      'be <bids@builders.exchange>'
     end
   end
 
