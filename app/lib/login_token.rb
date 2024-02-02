@@ -1,34 +1,45 @@
-class SessionsController < ApplicationController
-  def new
-    # Allow the login page to display in the bookmarklet iframe
-    response.headers.delete "X-Frame-Options"
+class LoginToken
+
+  def self.secret_key
+    ENV['SECRET_KEY_BASE']
   end
 
-  def create
-    user = User.find_by(email: params[:email])
-    if user.nil?
-      redirect_to unknown_user_path and return false
+  def self.create(user: nil)
+    payload = {
+      data: { user_id: user.id },
+      exp: 1.hour.from_now.to_i
+    }
+    JWT.encode(payload, self.secret_key, 'HS256')
+  end
+
+  def self.decode(token: nil)
+    if token.nil?
+      return "invalid"
     end
 
-    UserMailer.login_email(user: user).deliver_later
-    # Allow the login page to display in the bookmarklet iframe
-    response.headers.delete "X-Frame-Options"
-  end
+    begin
+      payload, _config = JWT.decode(token, self.secret_key, true, { algorithm: 'HS256' })
+    rescue JWT::ExpiredSignature
+      # If the token has expired, try again to decode it, but with expiration
+      # checking turned off, so we can tell who tried to log in.
+      begin
+        payload, _config = JWT.decode(token, self.secret_key, true, { algorithm: 'HS256', verify_expiration: false })
 
-  def token
-    user = LoginToken.decode(token: params[:token])
+        user_id = payload['data']['user_id']
+        user = User.find_by(id: user_id)
 
-    if user.present?
-      cookies.signed[:user_id] = { value: user.id, expires: 7.days.from_now, httponly: true }
-      redirect_to root_path
-    else
-      redirect_to unknown_user_path
+        if user.blank?
+          return false
+        else
+          return { user: user, expired: true }
+        end
+      rescue JWT::DecodeError
+        return false
+      end
     end
-  end
 
-  def destroy
-    cookies.delete(:user_id)
-    redirect_to root_path
+    user_id = payload['data']['user_id']
+    return User.find_by(id: user_id)
   end
 
 end
