@@ -56,7 +56,7 @@
     );
     return path;
   }
-
+  config.action_dispatch.cookies_same_site_protection = :none
   var src = editorURL + "?url=" + encodeURIComponent(getCanonicalURL());
   var iframe = document.createElement('iframe');
   iframe.setAttribute('src', src);
