@@ -4,7 +4,7 @@ class EmbedController < ApplicationController
 
   def inject
     @iframe_url = iframe_url()
-    render 'inject'
+    render 'inject.js'
   end
 
   def iframe
