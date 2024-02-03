@@ -59,7 +59,7 @@
 
   var src = editorURL + "?url=" + encodeURIComponent(getCanonicalURL());
   var iframe = document.createElement('iframe');
-  iframe.setAttribute('src', src);
+  iframe.setAttribute('src', "blackhole");
   iframe.setAttribute('id', 'klaxon-bookmarklet-iframe');
   iframe.setAttribute('frameborder', 0);
   iframe.style.top = '0px';
@@ -70,7 +70,7 @@
   iframe.style.zIndex = 21474836473; // just a big number, hopefully big enough
   document.body.appendChild(iframe);
   document.body.setAttribute('cursor', 'grab')
-  var iframe = window.open(src, "blackhole", "width=200,height=200");
+  //var iframe = window.open(src, "blackhole", "width=200,height=200");
 
   var styles = document.createElement('style');
   styles.setAttribute('id', 'klaxon-css-inject');
