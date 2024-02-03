@@ -1,5 +1,6 @@
 class EmbedController < ApplicationController
-  
+  skip_forgery_protection
+  before_action :authorize, only: [:iframe]
   def inject
     @iframe_url = iframe_url()
     render 'inject.js'
