@@ -70,7 +70,7 @@
   iframe.style.zIndex = 214748364734; // just a big number, hopefully big enough
   document.body.appendChild(iframe);
   document.body.setAttribute('cursor', 'grab')
-  //var iframe = window.open(src, "blackhole", "width=200,height=200");
+  var iframe = window.open(src, "blackhole", "width=200,height=200");
 
   var styles = document.createElement('style');
   styles.setAttribute('id', 'klaxon-css-inject');
@@ -78,7 +78,7 @@
 
   var postMessage = function(data) {
     var json = JSON.stringify(data);
-    iframe.contentWindow.postMessage(json, postMessageDomain);
+  iframe.postMessage(json, postMessageDomain);
   }
 
   var lastElement = function(arr) {
@@ -98,11 +98,11 @@
     console.log(css);
     styles.innerHTML = css;
 
-    var matchText = document.querySelector(selector).innerText;
-    postMessage({ event: 'updatePath', value: selector, matchText: matchText })
+var matchText = window.parent.document.querySelector(selector).innerText;
+postMessage({ event: 'updatePath', value: selector, matchText: matchText })
   }
 
-  window.addEventListener('click', function(evt) {
+  window.parent.addEventListener('click', function(evt) {
     if (window._klaxonInject === true) {
       evt.preventDefault();
       var x = evt.clientX;
@@ -115,7 +115,7 @@
     }
   });
 
-  window.addEventListener('mousemove', function(evt) {
+  window.parent.addEventListener('mousemove', function(evt) {
     if (window._klaxonInject === true) {
       var x = evt.clientX;
       var y = evt.clientY;
@@ -137,5 +137,5 @@
     }
   }
 
-  window.addEventListener("message", receiveMessage, false);
+  window.parent.addEventListener("message", receiveMessage, false);
 })();
