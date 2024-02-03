@@ -1,6 +1,7 @@
 class EmbedController < ApplicationController
-  skip_forgery_protection
-  before_action :authorize, only: [:iframe]
+  //skip_before_action :verify_authenticity_token, only: [:inject]
+  //before_action :authorize, only: [:iframe]
+
   def inject
     @iframe_url = iframe_url()
     render 'inject.js'
@@ -11,7 +12,7 @@ class EmbedController < ApplicationController
       page.user = current_user
     end
 
-    response.headers.delete "X-Frame-Options"
+    //response.headers.delete "X-Frame-Options"
     render layout: false
   end
 
