@@ -78,7 +78,7 @@
 
   var postMessage = function(data) {
     var json = JSON.stringify(data);
-  iframe.postMessage(json, postMessageDomain);
+  iframe.contentWindow.postMessage(json, postMessageDomain);
   }
 
   var lastElement = function(arr) {
