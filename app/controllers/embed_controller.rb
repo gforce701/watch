@@ -1,5 +1,4 @@
 class EmbedController < ApplicationController
-  skip_before_action :verify_authenticity_token, only: [:inject]
   
   def inject
     @iframe_url = iframe_url()
