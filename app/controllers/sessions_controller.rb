@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
   def new
     # Allow the login page to display in the bookmarklet iframe
-    response.headers "X-Frame-Options"
+    # esponse.headers.delete "X-Frame-Options"
   end
 
   def create
@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
 
     UserMailer.login_email(user: user).deliver_later
     # Allow the login page to display in the bookmarklet iframe
-    response.headers.delete "X-Frame-Options"
+    # response.headers.delete "X-Frame-Options"
   end
 
   def token
@@ -21,7 +21,7 @@ class SessionsController < ApplicationController
       if user[:expired]
         redirect_to expired_token_path(user[:user].id)
       else
-        cookies.signed[:user_id] = { value: user.id, expires: 7.days.from_now, httponly: true }
+        cookies.signed[:user_id] = { value: user.id, expires: 14.days.from_now, httponly: true }
         redirect_to root_path
       end
     else
